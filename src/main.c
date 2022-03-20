@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../include/my_secmalloc.h"
 #include <sys/mman.h>
-#include <string.h>
+#include <string.h> // to remove after tests.
 
 // printf = log to put in file later
 
@@ -11,28 +11,28 @@ void *my_malloc(size_t size){
         printf("WARN: allocating 0 bytes returning NULL pointer\n"); 
         return NULL;
     }
-    int *pointeur = mmap(NULL,sizeof(size_t)+size,PROT_READ | PROT_WRITE | PROT_EXEC,MAP_PRIVATE | MAP_ANONYMOUS,-1,0);
-    if(pointeur == MAP_FAILED){
+    int *pointer = mmap(NULL,sizeof(size_t)+size,PROT_READ | PROT_WRITE | PROT_EXEC,MAP_PRIVATE | MAP_ANONYMOUS,-1,0);
+    if(pointer == MAP_FAILED){
         printf("ERROR: Mapping Failed\n");  
     }
     else{
        
-        int *ptr = pointeur;
-        pointeur += sizeof(size_t)/sizeof(int); // 8/4 = 2
+        int *ptr = pointer;
+        pointer += sizeof(size_t)/sizeof(int); // 8/4 = 2
         *ptr = size + sizeof(size_t);
         printf("INFO: Successfully Allocate %d bytes at %p\n",size,pointeur);
     }
     
-    return pointeur;
+    return pointer;
 }
 
 
 void my_free(void *ptr){
     printf("INFO: Calling free function...\n");
     if(ptr != NULL){
-        int *pointeur = ptr - sizeof(size_t); 
-        int size = *pointeur;
-        int result = munmap(pointeur,size);
+        int *pointer = ptr - sizeof(size_t); 
+        int size = *pointer;
+        int result = munmap(pointer,size);
         if(0 == result){
             printf("INFO: Successfully free %d bytes at %p",size - sizeof(size_t),ptr);
         }
@@ -74,9 +74,9 @@ void *my_realloc(void *ptr, size_t size){
         return NULL;
     }
 
-    int *pointeur = ptr - sizeof(size_t); 
-    int old_size = *pointeur - sizeof(size_t);
-    *pointeur = size + sizeof(size_t);
+    int *pointer = ptr - sizeof(size_t); 
+    int old_size = *pointer - sizeof(size_t);
+    *pointer = size + sizeof(size_t);
     if(size > old_size){
         printf("WARN: size provided bigger than old size, can't reallocate\n");
     }
@@ -87,10 +87,10 @@ void *my_realloc(void *ptr, size_t size){
 
 int main(){
     size_t size = 1078;
-    int *pointeur = my_malloc(size);
+    int *pointer = my_malloc(size);
     //int *pointeur2 =  my_calloc(20, 40);
-    int *pointeur3 = my_realloc(pointeur,45);
-    my_free(pointeur);
+    int *pointer3 = my_realloc(pointer,45);
+    my_free(pointer);
     
     return 0;
 }
