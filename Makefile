@@ -1,18 +1,18 @@
 CC = gcc
-CFLAGS = -Wextra -Wall -Werror -pendantic -std=c99
+CFLAGS = -Wextra -Wall -Werror -pedantic -std=c99
 SDIR = src
-OBJ = *.o
+OBJ = src/main.o
 PRJ = my_secmalloc
 
 $(PRJ): $(OBJ)
-^I$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 all: $(PRJ)
 
 clean: $(OBJ)
-^I$(RM) $(OBJ) *~ .*.swp
+	$(RM) $(OBJ) *~ .*.swp
 
 static:
-^I${CC} $(SDIR)/main.c -o libmy_secmalloc.a
+	${CC} $(SDIR)/main.c -o libmy_secmalloc.a
 
 .PHONY: all clean

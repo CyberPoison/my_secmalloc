@@ -20,7 +20,7 @@ void *my_malloc(size_t size){
         int *ptr = pointer;
         pointer += sizeof(size_t)/sizeof(int); // 8/4 = 2
         *ptr = size + sizeof(size_t);
-        printf("INFO: Successfully Allocate %d bytes at %p\n",size,pointeur);
+        printf("INFO: Successfully Allocate %d bytes at %p\n",size,pointer);
     }
     
     return pointer;
@@ -44,7 +44,7 @@ void my_free(void *ptr){
 
 void *my_calloc(size_t nmemb, size_t size){
 
-    printf("INFO: Calling function calloc...");
+    printf("INFO: Calling function calloc...\n");
     size_t max_size = nmemb * size;
     int *ptr = my_malloc(max_size);
     int *cp_ptr = ptr;
@@ -88,7 +88,7 @@ void *my_realloc(void *ptr, size_t size){
 int main(){
     size_t size = 1078;
     int *pointer = my_malloc(size);
-    //int *pointeur2 =  my_calloc(20, 40);
+    int *pointeur2 =  my_calloc(20, 40);
     int *pointer3 = my_realloc(pointer,45);
     my_free(pointer);
     
