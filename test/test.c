@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <criterion/criterion.h>
-#include <src/my_secmalloc.c>
+#include <../src/my_secmalloc.c>
 
 void setup(void) {
     puts("Runs before the test");

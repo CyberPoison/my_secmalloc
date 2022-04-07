@@ -7,8 +7,8 @@
 int main(){
     size_t size = 1078;
     int *pointer = my_malloc(size);
-    int *pointeur2 =  my_calloc(20, 40);
-    int *pointer3 = my_realloc(pointer,45);
+    //int *pointeur2 =  my_calloc(20, 40);
+    //int *pointer3 = my_realloc(pointer,45);
     my_free(pointer);
     
     return 0;
