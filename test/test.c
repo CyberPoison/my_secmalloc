@@ -6,8 +6,10 @@ void setup(void) {
     puts("Runs before the test");
 }
 
-Test(){
-    
+test(){
+    size_t size = 1078;
+    int *pointer = my_malloc(size);
+    my_free(pointer);
 }
 
 void teardown(void) {
