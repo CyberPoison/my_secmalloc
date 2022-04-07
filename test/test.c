@@ -1,8 +1,15 @@
-#include <assert.h>
+#include <stdio.h>
+#include <criterion/criterion.h>
+#include <src/my_secmalloc.c>
 
-int main()
-{
+void setup(void) {
+    puts("Runs before the test");
+}
+
+Test(){
     
+}
 
-    return 0;
+void teardown(void) {
+    puts("Runs after the test");
 }

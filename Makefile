@@ -1,16 +1,16 @@
 CC = gcc
-CFLAGS = -Wextra -Wall  -pedantic -std=gnu99
-SDIR = src
+CFLAGS = -Wextra -Wall -pedantic -std=gnu99 -Iinclude
 OBJ = src/main.o
 PRJ = my_secmalloc
 LIBNAME = my_secmalloc
+#LDLIBS = -lm
 
 $(PRJ): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
 lib$(LIBNAME).a: $(OBJ)
 
-lib$(LIBNAME).so: CFLAGS += -fpic
+lib$(LIBNAME).so: CFLAGS += -fPIC
 lib$(LIBNAME).so: $(OBJ)
 
 all: $(PRJ)
@@ -27,7 +27,7 @@ distclean: clean
 dynamic: lib$(LIBNAME).so
 
 test:
-	$(CC) $(CFLAGS) test/test.c -l$(LIBNAME) -L. -o test
+	$(CC) $(CFLAGS) test/test.c lib$(LIBNAME).a -L. -o test_malloc
 
 %.a:
 	$(AR) $(ARFLAGS) $@ $^

@@ -14,9 +14,9 @@ void *my_malloc(size_t size){
         printf("ERROR: Mapping Failed\n");  
     }
     else {
-        int *ptr = pointer;
+        //int *ptr = pointer;
         pointer += sizeof(size_t)/sizeof(int); // 8/4 = 2
-        *ptr = size + sizeof(size_t);
+        //*ptr = size + sizeof(size_t);
         printf("INFO: Successfully Allocate %ld bytes at %p\n",size,pointer);
     }
     
