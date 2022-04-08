@@ -2,9 +2,9 @@ CC = gcc
 CFLAGS = -Wextra -Wall -pedantic -std=gnu99 -Iinclude
 OBJ = src/main.o
 MLC = src/my_secmalloc.o
+FNC = src/main.c src/my_secmalloc.c src/func.c
 PRJ = my_secmalloc
 LIBNAME = my_secmalloc
-#LDLIBS = -lm
 
 $(PRJ): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
@@ -12,12 +12,12 @@ $(PRJ): $(OBJ)
 lib$(LIBNAME).a: $(MLC)
 
 lib$(LIBNAME).so: CFLAGS += -fPIC
-lib$(LIBNAME).so: $(MLC)
+lib$(LIBNAME).so: $(MLC) #$(FNC)
 
 all: $(PRJ)
 
 clean: $(OBJ)
-	$(RM) $(OBJ) *~ .*.swp
+	$(RM) $(OBJ) $(MLC) *~ .*.swp
 
 static: lib$(LIBNAME).a
 
@@ -37,6 +37,7 @@ dataclean:
 	$(AR) $(ARFLAGS) $@ $^
 
 %.so:
-	$(LINK.c) -shared $^ $(LDLIBS) -o $@
+	#$(LINK.c) -shared $^ -o $@
+	gcc -shared -fPIC $(FNC) -o $@ 
 
 .PHONY: all clean distclean dataclean static dynamic test
