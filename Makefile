@@ -11,8 +11,8 @@ $(PRJ): $(OBJ)
 
 lib$(LIBNAME).a: $(MLC)
 
-lib$(LIBNAME).so: CFLAGS += -fPIC
-lib$(LIBNAME).so: $(MLC) #$(FNC)
+lib$(LIBNAME).so:
+	$(CC) -shared -fPIC $(FNC) -o $@ 
 
 all: $(PRJ)
 
@@ -39,7 +39,5 @@ dataclean:
 #%.so:
 	#$(LINK.c) -shared $^ -o $@
 
-lib$(LIBNAME).so:
-	gcc -shared -fPIC $(FNC) -o $@ 
 
 .PHONY: all clean distclean dataclean static dynamic test
