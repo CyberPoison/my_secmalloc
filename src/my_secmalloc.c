@@ -23,10 +23,10 @@ FILE *inicial_log(){
 }
 
 void log_generator(int fd, const char* format,...){
-    char buf [4096];
+    char buf [500];
     va_list argslist;
     va_start(argslist,format);
-    int size = vsnprintf(buf,4096,format,argslist);
+    int size = vsnprintf(buf,500,format,argslist);
     va_end(argslist);
     write(fd,buf,size);
 
