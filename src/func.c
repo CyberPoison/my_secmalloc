@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "my_secmalloc.c"
+#include "../include/my_secmalloc.h"
 
 void *calloc(size_t nmemb, size_t size) {
     return my_calloc(nmemb, size);

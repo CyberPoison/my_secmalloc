@@ -36,8 +36,10 @@ dataclean:
 %.a:
 	$(AR) $(ARFLAGS) $@ $^
 
-%.so:
+#%.so:
 	#$(LINK.c) -shared $^ -o $@
+
+lib$(LIBNAME).so:
 	gcc -shared -fPIC $(FNC) -o $@ 
 
 .PHONY: all clean distclean dataclean static dynamic test

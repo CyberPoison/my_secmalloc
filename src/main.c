@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "my_secmalloc.c"
 #include "../include/my_secmalloc.h"
 #include <sys/mman.h>
 
