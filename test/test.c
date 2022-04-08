@@ -8,13 +8,6 @@ void setup(void) {
     puts("Runs before the test");
 }
 
-Test(sample, test){
-    int *pointer = my_malloc(1080);
-    cr_expect(sizeof(pointer) == 1080, "OK");
-    my_free(pointer);
-}
-
-
 Test(sample, test) {
     cr_expect(strlen("Test") == 4, "Expected \"Test\" to have a length of 4.");
     cr_expect(strlen("Hello") == 4, "This will always fail, why did I add this?");
@@ -31,7 +24,6 @@ void test_malloc() {
     int *pointer = my_malloc(size);
     assert(sizeof(pointer) == 1078);
 }
-
 
 int main() {
     test_malloc();
